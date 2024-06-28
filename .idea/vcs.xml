@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/.." vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../Book Management System" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../BootStrap" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../Django" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../JavaScript" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../LFT_Test_Backend" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../Python_Excerise" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../Python_Excerise/grok-1" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/../dashcart" vcs="Git" />
+  </component>
+</project>

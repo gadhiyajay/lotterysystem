@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Lottery System</title>
+    <style>
+        /* Importing fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;500&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Tiro+Gurmukhi:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f3e5ab;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background-image: url('https://www.transparenttextures.com/patterns/linen.png');
+            background-color: #f8f5ec;
+            color: #4e342e;
+        }
+        .header {
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            background-color: #d32f2f;
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-family: 'Great Vibes', cursive;
+            font-size: 48px;
+        }
+        .content {
+            padding: 40px;
+            text-align: center;
+        }
+        .content h2 {
+            font-family: 'Tiro Gurmukhi', serif;
+            font-size: 36px;
+            color: #d32f2f;
+            margin-bottom: 20px;
+        }
+        .content p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #4e342e;
+        }
+        .btn-container {
+            margin-top: 30px;
+        }
+        .btn {
+            background-color: #d32f2f;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+            font-family: 'Tiro Gurmukhi', serif;
+        }
+        .btn:hover {
+            background-color: #c62828;
+            transform: translateY(-2px);
+        }
+        /* Reuse decorative elements */
+        .paisley, .mandala, .corner-decor {
+            position: absolute;
+            z-index: -1;
+        }
+        .paisley.large {
+            width: 180px;
+            height: 300px;
+            top: -100px;
+            right: -100px;
+            transform: rotate(45deg);
+            background: linear-gradient(135deg, #d32f2f 0%, #ff8f00 100%);
+            border-radius: 50% 0 50% 50%;
+            opacity: 0.7;
+        }
+        .paisley.medium {
+            width: 120px;
+            height: 200px;
+            bottom: -80px;
+            left: -80px;
+            transform: rotate(-45deg);
+            background: linear-gradient(135deg, #d32f2f 0%, #ff8f00 100%);
+            border-radius: 50% 0 50% 50%;
+            opacity: 0.7;
+        }
+        .paisley.small {
+            width: 80px;
+            height: 130px;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%) rotate(45deg);
+            background: linear-gradient(135deg, #d32f2f 0%, #ff8f00 100%);
+            border-radius: 50% 0 50% 50%;
+            opacity: 0.7;
+        }
+        .mandala {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            right: 10%;
+            background: radial-gradient(circle, #ff8f00, #ffb74d);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(255, 143, 0, 0.6);
+            animation: rotate 6s infinite linear;
+        }
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .corner-decor {
+            width: 50px;
+            height: 50px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Mughal-inspired_corner_design.png/512px-Mughal-inspired_corner_design.png');
+            background-size: cover;
+            opacity: 0.5;
+        }
+        .corner-decor.top-left {
+            top: -10px;
+            left: -10px;
+        }
+        .corner-decor.top-right {
+            top: -10px;
+            right: -10px;
+        }
+        .corner-decor.bottom-left {
+            bottom: -10px;
+            left: -10px;
+        }
+        .corner-decor.bottom-right {
+            bottom: -10px;
+            right: -10px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Lottery System</h1>
+    </div>
+    <div class="content">
+        <h2>Welcome to the Lottery System</h2>
+        <p>Experience the thrill of winning with our online lottery system. Enter now and see if you’re our next lucky winner!</p>
+        <div class="btn-container">
+            <a href="{% url 'login' %}" class="btn">Login</a>
+            <a href="{% url 'sign_up' %}" class="btn">Sign Up</a>
+        </div>
+    </div>
+    <!-- Reuse decorative elements -->
+    <div class="paisley large"></div>
+    <div class="paisley medium"></div>
+    <div class="paisley small"></div>
+    <div class="mandala"></div>
+    <div class="corner-decor top-left"></div>
+    <div class="corner-decor top-right"></div>
+    <div class="corner-decor bottom-left"></div>
+    <div class="corner-decor bottom-right"></div>
+</body>
+</html>

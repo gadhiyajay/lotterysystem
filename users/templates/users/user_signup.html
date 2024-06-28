@@ -1,0 +1,17 @@
+{% extends 'users/base.html' %}
+
+{% block title %}User Registration - Lottery System{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h2>User Registration</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+    </form>
+    <div class="form-footer">
+        <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+    </div>
+</div>
+{% endblock %}
