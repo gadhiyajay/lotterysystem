@@ -1,0 +1,143 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+  <div class="lottery-container">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+    <h1 class="page-title">Lottery Details</h1>
+
+    <div class="lottery-details">
+      <h2 class="lottery-title">{{ lottery.title }}</h2>
+
+      {% if lottery.image %}
+        <img class="lottery-image" src="{{ lottery.image.url }}" alt="Lottery Image">
+        ({{lottery.image.url}})
+      {% endif %}
+
+      <p class="lottery-creator"><strong>Creator:</strong> {{ lottery.creator }}</p>
+      <p class="lottery-description"><strong>Description:</strong> {{ lottery.description }}</p>
+      <p class="lottery-expiry"><strong>Expiry Date:</strong> {{ lottery.expiry_date }}</p>
+      <p class="lottery-amount-to-enter"><strong>Amount to Enter:</strong> {{ lottery.amount_to_enter }}</p>
+      <p class="lottery-winning-amount"><strong>Winning Amount:</strong> {{ lottery.winning_amount }}</p>
+      {% if lottery.winner %}
+        <p class="lottery-winner"><strong>Winner:</strong> <mark>{{ lottery.winner }}</mark></p>
+      {% else %}
+        <p class="lottery-no-winner">No winner yet</p>
+      {% endif %}
+    </div>
+    {% if request.user.is_authenticated %}
+        <form action="{% url 'lottery_entry' lottery.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit">Enter Lottery</button>
+        </form>
+    {% else %}
+        <p>You must be logged in to enter this lottery. <a href="{% url 'login' %}">Login</a></p>
+    {% endif %}
+  </div>
+
+  <style>
+    /* General Page Styles */
+    body {
+      font-family: 'Lato', sans-serif;
+      color: #333;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Container */
+    .lottery-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    /* Page Title */
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      margin-bottom: 30px;
+      color: #444;
+    }
+
+    /* Lottery Details */
+    .lottery-details {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .lottery-image {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .lottery-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: #555;
+    }
+
+    .lottery-details p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    .lottery-creator, .lottery-description, .lottery-expiry, .lottery-amount-to-enter, .lottery-winning-amount, .lottery-winner, .lottery-no-winner {
+      font-family: 'Lato', sans-serif;
+      color: #666;
+    }
+
+    /* Alerts */
+    .alert {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 5px;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .alert-success {
+      background-color: #28a745;
+    }
+
+    .alert-warning {
+      background-color: #ffc107;
+    }
+
+    .alert-danger {
+      background-color: #dc3545;
+    }
+
+    /* Add more alerts styles as needed */
+
+    /* Button Styles (if any) */
+    .btn {
+      background-color: #555;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #444;
+    }
+
+  </style>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'users/base.html' %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter {{ lottery.title }}</title>
+</head>
+<body>
+    <h1>Enter Lottery: {{ lottery.title }}</h1>
+    <p>Are you sure you want to enter the lottery for "{{ lottery.title }}"?</p>
+
+    <form action="{% url 'enter_lottery' lottery.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Yes, Enter</button>
+    </form>
+
+    <a href="{% url 'lottery_detail' lottery.pk %}">Cancel</a>
+</body>
+</html>

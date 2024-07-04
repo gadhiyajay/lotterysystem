@@ -7,6 +7,7 @@
     <mapping directory="$PROJECT_DIR$/../Django" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../JavaScript" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../LFT_Test_Backend" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../Python_Excerise" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../Python_Excerise/grok-1" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/../dashcart" vcs="Git" />

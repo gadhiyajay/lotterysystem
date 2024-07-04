@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import CustomUserForm
 from django.contrib.auth.decorators import login_required
+from .models import Wallet
+from decimal import Decimal
 # Create your views here.
 
 
@@ -40,3 +42,17 @@ def logIn(request):
 def logOut(request):
     logout(request)
     return redirect('login')
+
+
+def walletUpdate(request):
+    wallet, created = Wallet.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        new_balance = request.POST.get('balance')
+        if new_balance:
+            wallet.balance = Decimal(wallet.balance) + Decimal(new_balance)
+            wallet.save()
+
+        return redirect('wallet')
+    return render(request, 'users/update_wallet.html', {'wallet' : wallet})
+

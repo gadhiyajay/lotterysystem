@@ -27,3 +27,22 @@ class Wallet(TimeStampedModel):
     
     def __str__(self):
         return f'{self.user.username}- {self.balance} Rs.'
+
+
+class WalletHistory(TimeStampedModel):
+    CREDIT = 'credit'
+    DEBIT = 'debit'
+
+    TRANSACTION_TYPES = [
+        (CREDIT, 'Credit'),
+        (DEBIT, 'Debit'),
+    ]
+    wallet = models.ForeignKey(Wallet, on_delete=models.CASCADE, related_name='wallet_history')
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    transaction_type = models.CharField(choices=TRANSACTION_TYPES, max_length=6)
+
+    def __str__(self):
+        return f'{self.wallet.user.username} ~ {self.transaction_type} of {self.amount}'
+
+    class Meta:
+        ordering = ['-created']

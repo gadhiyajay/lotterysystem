@@ -17,3 +17,18 @@ class Lottery(TitleDescriptionModel):
     
     class Meta:
         verbose_name_plural = 'Lotteries'
+
+
+class LotteryEntry(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='lottery_entries')
+    lottery = models.ForeignKey(Lottery, on_delete=models.CASCADE, related_name='entries')
+    entered_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username} -- {self.lottery.title}'
+
+    class Meta:
+        verbose_name_plural = 'Lottery Entries'
+
+

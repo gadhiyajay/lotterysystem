@@ -4,10 +4,12 @@
 
 {% block content %}
 <div class="profile-container">
-    <h2>User Profile</h2>
+    <h2>User Profile<mark> ({{user.user_type}})</mark></h2>
     <p><strong>Username:</strong> {{ user.username }}</p>
     <p><strong>Email:</strong> {{ user.email }}</p>
     <p><strong>Birthday:</strong> {{ user.birth_date }}</p>
-    <a href="{% url 'logout' %}" class="logout-link">Logout</a>
+    {% if user.user_type == 'buyer' %}
+    <p><strong>Balance:</strong> {{ user.wallet.balance }}</p>
+    {% endif %}
 </div>
 {% endblock %}

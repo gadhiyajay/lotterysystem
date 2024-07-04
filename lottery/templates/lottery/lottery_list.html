@@ -1,0 +1,141 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+  <h1 class="page-title">Lotteries</h1>
+
+  <style>
+    /* General Page Styles */
+    body {
+      font-family: 'Lato', sans-serif;
+      color: #333;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Page Title */
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      text-align: center;
+      color: #444;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+
+    /* Lottery Table */
+    .lottery-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Lato', sans-serif;
+      background-color: #fff;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .lottery-table th, .lottery-table td {
+      padding: 15px;
+      text-align: left;
+    }
+
+    .lottery-table th {
+      background-color: #333;
+      color: #fff;
+    }
+
+    .lottery-table td {
+      border-bottom: 1px solid #ddd;
+    }
+
+    .lottery-table tr:hover {
+      background-color: #f5f5f5;
+      transition: background-color 0.3s ease;
+    }
+
+    .lottery-table a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .lottery-table a:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .lottery-table, .lottery-table th, .lottery-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .lottery-table th {
+        text-align: center;
+      }
+
+      .lottery-table td {
+        text-align: center;
+        border-bottom: none;
+      }
+
+      .lottery-table tr {
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+    }
+  </style>
+
+<a href="{% url 'add_lottery' %}"> Add Lottery </a><br>
+<a href="{% url 'lottery_entry_list' %}"> View Entered-Users Lottery List</a>
+
+  {% if lotteries %}
+    <table class="lottery-table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Creator</th>
+          <th>Expiry Date</th>
+          <th>Amount to Enter</th>
+          <th>Winning Amount</th>
+          <th>Winner</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for lottery in final_list %}
+          <tr>
+            <td><a href="{% url 'lottery_detail' lottery.pk %}">{{ lottery.title }}</a></td>
+            <td>{{ lottery.creator }}</td>
+            <td>{{ lottery.expiry_date }}</td>
+            <td>{{ lottery.amount_to_enter }}</td>
+            <td>{{ lottery.winning_amount }}</td>
+            <td>
+              {% if lottery.winner %}
+                {{ lottery.winner }}
+              {% else %}
+                No winner yet
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p class="no-lotteries">No active lotteries at the moment.</p>
+  {% endif %}
+<br>
+<br>
+<br>
+{% if  final_list.has_previous %}
+    <a href="?page=1">&laquo First</a>
+    <a href="?page={{final_list.previous_page_number}}">Previous</a>
+{% endif %}
+Page {{final_list.number}} of {{final_list.paginator.num_pages}}
+
+{% if  final_list.has_next %}
+    <a href="?page={{final_list.paginator.num_pages}}">&raquo Last</a>
+    <a href="?page={{final_list.next_page_number}}">Next</a>
+{% endif %}
+
+
+{% endblock %}

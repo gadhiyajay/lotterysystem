@@ -1,0 +1,14 @@
+{% extends 'users/base.html' %}
+
+{% block content %}
+
+<div class="profile-container">
+    <h2>User Wallet</h2>
+    <p><strong>Username:</strong> {{ user.username }}</p>
+    {% if user.user_type == 'buyer' %}
+    <p><strong>Balance:</strong> {{ user.wallet.balance }}</p>
+    {% endif %}
+    <a href="{% url 'update_balance' %}" class="logout-link">Add Balance</a>
+</div>
+
+{% endblock %}

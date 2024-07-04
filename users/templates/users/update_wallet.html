@@ -1,0 +1,19 @@
+{% extends 'users/base.html' %}
+
+{% block title %}Wallet - Update Balance{% endblock %}
+
+{% block content %}
+<div class="wallet-container">
+    <h2>Wallet</h2>
+    <p><strong>Username:</strong> {{ wallet.user.username }}</p>
+    <p><strong>Balance:</strong> {{ wallet.balance }}</p>
+
+    <h3>Update Balance</h3>
+    <form method="post">
+        {% csrf_token %}
+        <label for="balance">New Balance:</label>
+        <input type="number" step="0.5" name="balance" id="balance" required>
+        <button type="submit">Update Balance</button>
+    </form>
+</div>
+{% endblock %}
