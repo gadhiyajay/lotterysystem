@@ -1,0 +1,13 @@
+{% extends 'users/base.html' %}
+{% block content %}
+    <title>Edit Lottery</title>
+    <!-- Include Bootstrap or any other CSS framework if needed -->
+<body>
+    <h1>Edit Lottery</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Render the form fields -->
+        <button type="submit">Save Changes</button>
+    </form>
+</body>
+{% endblock %}

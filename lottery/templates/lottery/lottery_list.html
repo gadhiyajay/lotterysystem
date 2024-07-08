@@ -59,8 +59,58 @@
       text-decoration: none;
     }
 
+    .dashboard-links a {
+      color: #007bff;
+      text-decoration: none;
+      padding-right: 20px;
+    }
+
     .lottery-table a:hover {
       text-decoration: underline;
+    }
+
+    /* Delete Button */
+    .delete-button {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+
+    .delete-button:hover {
+      background-color: #cc0000;
+    }
+
+    /* Edit Button */
+    .edit-button {
+      background-color: #4CAF50; /* Green background */
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-left: 10px;
+    }
+
+    .edit-button:hover {
+      background-color: #45a049; /* Darker green */
+    }
+
+    /* Pagination Links */
+    .pagination {
+      margin-top: 20px;
+      text-align: center; /* Center pagination links */
+    }
+
+    .pagination a {
+      color: #007bff;
+      text-decoration: none;
+      margin-right: 10px;
     }
 
     /* Responsive Styles */
@@ -86,8 +136,12 @@
     }
   </style>
 
-<a href="{% url 'add_lottery' %}"> Add Lottery </a><br>
-<a href="{% url 'lottery_entry_list' %}"> View Entered-Users Lottery List</a>
+  {% if user.is_authenticated and user.user_type == 'vendor' %}
+    <div class="dashboard-links">
+      <a href="{% url 'add_lottery' %}" class="btn btn-primary">Add Lottery</a>
+      <a href="{% url 'lottery_entry_list' %}" class="btn btn-primary">View Entered-Users Lottery List</a>
+    </div>
+  {% endif %}
 
   {% if lotteries %}
     <table class="lottery-table">
@@ -99,6 +153,7 @@
           <th>Amount to Enter</th>
           <th>Winning Amount</th>
           <th>Winner</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -116,26 +171,36 @@
                 No winner yet
               {% endif %}
             </td>
+            <td>
+              {% if user == lottery.creator %}
+                <form method="post" action="{% url 'delete_lottery' lottery.pk %}" onsubmit="return confirm('Are you sure you want to delete this lottery?');">
+                  {% csrf_token %}
+                  <button type="submit" class="delete-button">Delete</button>
+                </form>
+                <form method="get" action="{% url 'edit_lottery' lottery.pk %}">
+                  {% csrf_token %}
+                  <button type="submit" class="edit-button">Edit</button>
+                </form>
+              {% endif %}
+            </td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
+
+    <div class="pagination">
+      {% if final_list.has_previous %}
+        <a href="?page=1">&laquo; First</a>
+        <a href="?page={{ final_list.previous_page_number }}">Previous</a>
+      {% endif %}
+      Page {{ final_list.number }} of {{ final_list.paginator.num_pages }}
+      {% if final_list.has_next %}
+        <a href="?page={{ final_list.next_page_number }}">Next</a>
+        <a href="?page={{ final_list.paginator.num_pages }}">Last &raquo;</a>
+      {% endif %}
+    </div>
+
   {% else %}
     <p class="no-lotteries">No active lotteries at the moment.</p>
   {% endif %}
-<br>
-<br>
-<br>
-{% if  final_list.has_previous %}
-    <a href="?page=1">&laquo First</a>
-    <a href="?page={{final_list.previous_page_number}}">Previous</a>
-{% endif %}
-Page {{final_list.number}} of {{final_list.paginator.num_pages}}
-
-{% if  final_list.has_next %}
-    <a href="?page={{final_list.paginator.num_pages}}">&raquo Last</a>
-    <a href="?page={{final_list.next_page_number}}">Next</a>
-{% endif %}
-
-
 {% endblock %}

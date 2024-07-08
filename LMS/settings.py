@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-$o4^senc&11-hhadf3)hn(i=su&4q$g_dmdsb%vjf-^8g1dc#)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -132,4 +132,5 @@ AUTH_USER_MODEL = 'users.User'
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-print(MEDIA_ROOT)
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

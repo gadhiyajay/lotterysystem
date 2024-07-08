@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import User
+from users.models import User, Wallet, WalletHistory
 from django_extensions.db.models import TitleDescriptionModel
 # Create your models here.
 
@@ -10,7 +10,6 @@ class Lottery(TitleDescriptionModel):
     expiry_date = models.DateTimeField()
     amount_to_enter = models.DecimalField(max_digits=10, decimal_places=2)
     winning_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    winner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='won_by')
 
     def __str__(self):
         return f'{self.title} - {self.winner}'
@@ -30,5 +29,9 @@ class LotteryEntry(models.Model):
 
     class Meta:
         verbose_name_plural = 'Lottery Entries'
+
+
+class LotteryWinner(models.Model):
+    lottery = models.ForeignKey(Lottery, on_delete=models.CASCADE, related_name='winners')
 
 

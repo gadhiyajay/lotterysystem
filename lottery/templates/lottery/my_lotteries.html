@@ -1,0 +1,69 @@
+{% extends 'users/base.html' %}
+
+{% block title %}
+    My Lotteries
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5 mb-4">Lotteries You Entered</h1>
+        <ul class="list-group">
+            {% for entry in lottery_entries %}
+                <li class="list-group-item">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>{{ entry.lottery.title }}</span>
+                        <span class="date">{{ entry.entered_at }}</span>
+                        <span class="expiry-date">{{ entry.lottery.expiry_date }}</span>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="list-group-item">No lotteries entered yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        color: #343a40;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        margin-top: 30px;
+    }
+
+    .list-group-item {
+        border: none;
+        padding: 10px 15px;
+        margin-bottom: 10px;
+        background-color: #f8f9fa;
+    }
+
+    .date {
+        background-color: #007bff;
+        color: #fff;
+        font-size: 0.9rem;
+        padding: 5px 10px;
+        border-radius: 15px;
+    }
+    .expiry-date {
+        background-color: red;
+        color: #fff;
+        font-size: 0.9rem;
+        padding: 5px 10px;
+        border-radius: 15px;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+</style>
+{% endblock %}

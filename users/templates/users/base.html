@@ -83,7 +83,10 @@
             <ul>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'lottery_list' %}">Lotteries</a></li>
+                {% if request.user.user_type == 'buyer' %}
                 <li><a href="{% url 'wallet' %}">Wallet</a></li>
+                <li><a href="{% url 'users_lotteries' %}">My Lotteries</a></li>
+                {% endif %}
                 <li><a href="{% url 'profile' %}">Profile</a></li>
                 <li><a href="{% url 'logout' %}">Logout</a></li>
                 {% else %}

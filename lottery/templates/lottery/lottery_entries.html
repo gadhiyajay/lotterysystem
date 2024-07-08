@@ -1,9 +1,6 @@
 {% extends 'users/base.html' %}
-
+{% load custom_tags %}
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Lottery Entries</title>
@@ -48,7 +45,6 @@
             text-align: center;
         }
     </style>
-</head>
 <body>
     <h1>User Lottery Entries</h1>
 
@@ -58,6 +54,8 @@
                 <th>User</th>
                 <th>Lottery</th>
                 <th>Entry Count</th>
+                <th>Entry Fees</th>
+                <th>Total amount</th>
             </tr>
         </thead>
         <tbody>
@@ -66,6 +64,8 @@
                     <td>{{ entry.user__username }}</td>
                     <td>{{ entry.lottery__title }}</td>
                     <td>{{ entry.entry_count }}</td>
+                    <td>{{ entry.lottery__amount_to_enter }}</td>
+                    <td>{{ entry.entry_count|total_amount:entry.lottery__amount_to_enter }}</td>
                 </tr>
             {% empty %}
                 <tr class="empty-row">

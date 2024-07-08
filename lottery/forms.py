@@ -9,6 +9,7 @@ class LotteryForm(forms.ModelForm):
         model = Lottery
         fields = ['title', 'description', 'image', 'creator', 'expiry_date', 'amount_to_enter', 'winning_amount',
                   'winner']
+        exclude = ['creator', 'winner']
 
     def clean_creator(self):
         creator = self.cleaned_data.get("creator")
